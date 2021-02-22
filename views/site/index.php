@@ -13,7 +13,7 @@ use app\models\Tags;
 use yii\bootstrap\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = 'My Yii Application';
+$this->title = 'Aligiway task';
 ?>
 <div class="site-index">
     <?php
