@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\forms\SearchArticlesForm;
+use app\helpers\FilterArticlesHelper;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +63,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $formSearch = new SearchArticlesForm();
+
+        if($formSearch->load(Yii::$app->request->post())){
+            $filterArticles = new FilterArticlesHelper();
+            $filterArticles->setNameArticle($formSearch->nameArticles);
+            $filterArticles->setIdCategories($formSearch->idCategories);
+            $filterArticles->setIdTags($formSearch->idTags);
+            $articles = $filterArticles->searchArticles();
+
+            return $this->render('index',[
+                'formSearch' => $formSearch,
+                'articles' => $articles,
+            ]);
+        }
+
+        return $this->render('index',[
+            'formSearch' => $formSearch
+        ]);
     }
 
     /**

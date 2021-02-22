@@ -2,52 +2,72 @@
 
 /* @var $this yii\web\View */
 
+/** @var $formSearch SearchArticlesForm */
+
+/** @var $articles AbstractSearchArticles */
+
+use app\forms\SearchArticlesForm;
+use app\helpers\AbstractSearchArticles;
+use app\models\Categories;
+use app\models\Tags;
+use yii\bootstrap\Html;
+use yii\widgets\ActiveForm;
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+    <?php
+    $form = ActiveForm::begin();
+    ?>
+    <div class="row">
+        <div class="col">
+            <?= $form->field($formSearch, 'nameArticles')->textInput() ?>
         </div>
-
+        <div class="col">
+            <?= $form->field($formSearch, 'idCategories')->dropDownList(
+                Categories::getListCategories(),
+                [
+                    'multiple' => 'multiple',
+                ]
+            ) ?>
+        </div>
+        <div class="col">
+            <?= $form->field($formSearch, 'idTags')->dropDownList(
+                Tags::getListTags(),
+                [
+                    'multiple' => 'multiple',
+                ]
+            ) ?>
+        </div>
     </div>
+
+    <?= Html::submitButton('Search', ['class' => 'btn btn-success']) ?>
+
+    <?php
+    ActiveForm::end();
+    ?>
+
+    <?php
+    if (isset($articles)){
+    ?>
+
+    <?= Html::tag('h1','Result search:') ?>
+    <div class="row">
+        <?php
+        foreach ($articles as $article) {
+            ?>
+
+            <div class="col-lg-4 col-sm-4">
+                <?= Html::tag('h3', "Name Article: {$article->name}")?>
+                <?= Html::tag('p', "Article description: {$article->description}")?>
+            </div>
+            <?php
+        }
+        }
+    else{
+        echo 'Not found';
+    }
+        ?>
+    </div>
+
 </div>

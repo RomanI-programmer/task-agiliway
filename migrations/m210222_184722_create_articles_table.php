@@ -27,37 +27,37 @@ class m210222_184722_create_articles_table extends Migration
 
         $this->insert('articles',[
             'name' => 'Top 10 films about artificial intelligence',
-            'description' => '',
+            'description' => 'description article 1',
             'category_id' => 3,
         ]);
 
         $this->insert('articles',[
             'name' => '7 annoying mistakes I made as a JS developer',
-            'description' => '',
+            'description' => 'description article 2',
             'category_id' => 3,
         ]);
 
         $this->insert('articles',[
             'name' => 'Top 10: GitHub appreciated the popularity of programming languages',
-            'description' => '',
+            'description' => 'description article 3',
             'category_id' => 3,
         ]);
 
         $this->insert('articles',[
             'name' => 'Life Above an Abyss: How Spain Got a City on a Rock with a Single Street',
-            'description' => '',
+            'description' => 'description article 4',
             'category_id' => 1,
         ]);
 
         $this->insert('articles',[
             'name' => 'Admission to a top British university in the Chevening program',
-            'description' => '',
+            'description' => 'description article 5',
             'category_id' => 2,
         ]);
 
         $this->insert('articles',[
             'name' => 'World crisis - is it time to enter a foreign university?',
-            'description' => '',
+            'description' => 'description article 6',
             'category_id' => 2,
         ]);
     }
